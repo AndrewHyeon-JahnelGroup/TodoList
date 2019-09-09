@@ -13,7 +13,8 @@ class Home extends React.Component {
     super(props)
     this.state = {
       itemlist: [1,2,3,4,5,6],
-      modalIsOpen: false
+      modalIsOpen: false,
+      editModalIsOpen: false
     }
 
     this.openModal = this.openModal.bind(this);
@@ -40,22 +41,14 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-    // $.get('/list')
-    //   .then((res) => {
-    //     console.log(res, 'res')
-    //     this.setState(itemlist, res)
-    //   })
-    //   .catch( (err) => {
-    //     console.log(err, ';here')
-    //   })
 
     fetch('http://localhost:3000/list', {method:'GET'})
       .then( (res) => {
-        console.log(res)
+
         return res.json()
       }).then( (data) => {
         this.setState({
-          itemlist: data
+          itemlist: ['asfdsf', '1234554','grq3tr']
         })
       })
       .catch( (err) => {

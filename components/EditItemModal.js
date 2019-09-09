@@ -38,7 +38,7 @@ const styles = {
 };
 
 
-class AddItemModal extends React.Component{
+class EditItemModal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -88,4 +88,4 @@ class AddItemModal extends React.Component{
   }
 }
 
-export default AddItemModal
+export default EditItemModal
