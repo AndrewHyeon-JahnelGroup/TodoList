@@ -15,6 +15,7 @@ class TaskListItem extends React.Component{
     super(props)
     this.state = {
       editModalIsOpen: false,
+      completed: this.props.completed
     }
     this.editItem = this.editItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
@@ -49,6 +50,7 @@ class TaskListItem extends React.Component{
       console.log('delete broken')
     })
   }
+
   openEditModal() {
     console.log('openclicked')
     this.setState({editModalIsOpen: true});
@@ -73,6 +75,7 @@ class TaskListItem extends React.Component{
 
 
   render(){
+
     return(
       <div id="listitem">
         <ListItem>

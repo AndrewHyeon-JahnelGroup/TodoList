@@ -18,7 +18,7 @@ class Home extends React.Component {
       itemlist: [1,2,3,4,5,6],
       modalIsOpen: false,
     }
-
+    this.addItem = this.addItem.bind(this)
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -50,6 +50,7 @@ class Home extends React.Component {
       taskDescription: taskDesc
     })
     .then( (res) => {
+      this.setState({modalIsOpen: false});
       console.log(res, 'post success')
     })
     .catch( (err) => {
@@ -66,7 +67,19 @@ class Home extends React.Component {
   }
 
   componentDidUpdate(){
-    console.log('update')
+    fetch('http://localhost:3000/list', {method:'GET'})
+      .then( (res) => {
+
+        return res.json()
+      }).then( (data) => {
+        console.log('data', data)
+        this.setState({
+          itemlist: data
+        })
+      })
+      .catch( (err) => {
+        console.log(err)
+      })
     this.render()
   }
 
