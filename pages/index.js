@@ -2,24 +2,28 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import Nav from '../components/nav'
-import ListItem from '../components/ListItem'
 import AddItemModal from '../components/AddItemModal'
+import TaskList from '../components/TaskList'
 import { Button } from 'react-bootstrap'
 import $ from 'jquery'
 import fetch from 'isomorphic-fetch'
+
 class Home extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
+      tasklists: [],
+      currentlist: '',
       itemlist: [1,2,3,4,5,6],
       modalIsOpen: false,
-      editModalIsOpen: false
     }
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.editItem = this.editItem.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
   }
 
   openModal() {
@@ -36,7 +40,7 @@ class Home extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
-  addItem(event){
+  addItem(){
     var taskName = document.getElementById('taskname').value
     var taskDesc = document.getElementById('taskdesc').value
     // var taskName = document.getElementById('taskname')
@@ -54,10 +58,15 @@ class Home extends React.Component {
   }
 
   deleteItem(){
+    console.log('delete working')
+  }
 
+  editItem(){
+    console.log('edit working')
   }
 
   componentDidUpdate(){
+    console.log('update')
     this.render()
   }
 
@@ -70,7 +79,21 @@ class Home extends React.Component {
       }).then( (data) => {
         console.log('data', data)
         this.setState({
-          itemlist: ['asfdsf', '1234554','grq3tr']
+          itemlist: [
+            {
+              taskName: 'todo1',
+              taskDescription: 'todo1 description',
+              completed: false,
+              tasklist: 'urgent tasks'
+            },
+            {
+              taskName: 'todo2',
+              taskDescription: 'todo2 description',
+              completed: false,
+              tasklist: 'urgent tasks'
+            }
+
+          ]
         })
       })
       .catch( (err) => {
@@ -86,14 +109,20 @@ class Home extends React.Component {
 
         </div>
         <div id="list">
-          <h3>todo list</h3>
-              {this.state.itemlist.map( (item) =>   (
-                <ListItem deleteItem={this.deleteItem} item={item} />
-              ))}
+          <TaskList
+            editItem={this.editItem}
+            deleteItem={this.deleteItem}
+            itemlist={this.state.itemlist}
+          />
         </div>
         <div id = "buttons">
           <Button variant="primary" onClick={this.openModal}>Add Item</Button>
-          <AddItemModal openModal={this.openModal} closeModal={this.closeModal} modalIsOpen={this.state.modalIsOpen} addItem={this.addItem}/>
+          <AddItemModal
+            openModal={this.openModal}
+            closeModal={this.closeModal}
+            modalIsOpen={this.state.modalIsOpen}
+            addItem={this.addItem}
+          />
         </div>
       </div>
     )
