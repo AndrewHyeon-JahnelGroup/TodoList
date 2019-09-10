@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
+import $ from 'axios'
 class TaskListItem extends React.Component{
 
   constructor(props){
@@ -15,9 +16,27 @@ class TaskListItem extends React.Component{
     this.state = {
       editModalIsOpen: false,
     }
-
+    this.editItem = this.editItem.bind(this)
     this.openEditModal = this.openEditModal.bind(this)
     this.closeEditModal = this.closeEditModal.bind(this)
+  }
+
+  editItem() {
+    var newName = document.getElementById('edittaskname').value
+    var newDesc = document.getElementById('edittaskdesc').value
+
+    var path = '/list/edit'
+    $.post(path, {
+      id: this.props.id,
+      taskName: newName,
+      taskDescription: newDesc
+    })
+    .then( (res) => {
+      console.log('update works')
+    })
+    .catch( (err) => {
+      console.log('update error')
+    })
   }
 
   openEditModal() {
@@ -74,7 +93,7 @@ class TaskListItem extends React.Component{
           openModal={this.openEditModal}
           closeModal={this.closeEditModal}
           editModalIsOpen={this.state.editModalIsOpen}
-          editItem={this.props.editItem}
+          editItem={this.editItem}
           name={this.props.itemName}
           desc={this.props.itemDescription}
         />

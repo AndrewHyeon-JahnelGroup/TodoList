@@ -61,7 +61,7 @@ class Home extends React.Component {
     console.log('delete working')
   }
 
-  editItem(){
+  editItem(id){
     console.log('edit working')
   }
 

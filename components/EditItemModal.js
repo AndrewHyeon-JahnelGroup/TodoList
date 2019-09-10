@@ -73,12 +73,12 @@ class EditItemModal extends React.Component{
           <DialogTitle>{"Edit Task"}</DialogTitle>
           <DialogContent>
             <TextField
-              id="taskname"
+              id="edittaskname"
               label={this.props.name}
               margin="normal"
             />
             <TextField
-              id="taskdesc"
+              id="edittaskdesc"
               label={this.props.desc}
               margin="normal"
             />
@@ -87,7 +87,7 @@ class EditItemModal extends React.Component{
             <Button onClick={this.props.closeModal} color="primary">
               Close
             </Button>
-            <Button onClick={this.editItem} color="primary">
+            <Button onClick={this.props.editItem} color="primary">
               Edit Item
             </Button>
           </DialogActions>

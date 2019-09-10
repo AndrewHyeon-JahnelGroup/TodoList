@@ -20,6 +20,7 @@ class TaskList extends React.Component{
             return(
               <ListItem button>
                 <TaskListItem
+                  id={item._id}
                   number={i}
                   itemName={item.name}
                   itemDescription={item.description}

@@ -20,5 +20,16 @@ router.route('/')
     res.status(200).send()
   })
 
+router.route('/edit')
+  .post((req,res) => {
+    console.log(req.body, 'edit request body')
+    db.editTask(req.body, (err) => {
+      if(err){
+        console.log('edit error')
+      }
+
+    })
+  })
+
 
 module.exports = router

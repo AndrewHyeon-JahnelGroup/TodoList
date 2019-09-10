@@ -34,6 +34,19 @@ const taskSchema = mongoose.Schema({
 // const List = mongoose.model('List', listSchema, 'lists')
 const Task = mongoose.model('Task', taskSchema, 'tasks')
 
+const editTask = (data, cb) => {
+  console.log(data, 'data in edittask')
+  var name = data.taskName
+  var desc = data.taskDescription
+  Task.findOneAndUpdate({_id: data.id}, {$set:{name:name, description:desc}},(err, task) => {
+    console.log(task)
+  })
+  // Task.findOneAndUpdate({id: data.id}, {$set:{
+  //   name: data.taskName,
+  //   description: data.taskDescription
+  // }}, cb())
+}
+
 const getTasks = (cb) => {
   Task.find((err,data) => {
     if(err){
@@ -61,6 +74,7 @@ const saveTask = (task, cb) => {
   })
 }
 
+module.exports.editTask = editTask
 module.exports.getTasks = getTasks
 module.exports.saveTask = saveTask
 module.exports.db = db
