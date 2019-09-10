@@ -1,7 +1,11 @@
 import React from 'react'
 import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import $ from 'axios'
 
 const customContentStyle = {
   backgroundColor: '#1a1aff',
@@ -50,10 +54,6 @@ class AddItemModal extends React.Component{
     console.log('updated', this.props)
   }
 
-  addItem(){
-
-  }
-
   render(){
 
     return(
@@ -67,21 +67,27 @@ class AddItemModal extends React.Component{
           autoScrollBodyContent={true}
           contentClassName='dialog'
         >
-          <TextField
-            label="Task Name"
-            margin="normal"
-          />
-          <TextField
-            label="Task Description"
-            margin="normal"
-          />
-
-          <Button onClick={this.props.closeModal} color="primary">
-            Close
-          </Button>
-          <Button onClick={this.addItem} color="primary">
-            Add Item
-          </Button>
+          <DialogTitle>{"Add New Task"}</DialogTitle>
+          <DialogContent>
+            <TextField
+              id="taskname"
+              label="Task Name"
+              margin="normal"
+            />
+            <TextField
+              id="taskdesc"
+              label="Task Description"
+              margin="normal"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.props.closeModal} color="primary">
+              Close
+            </Button>
+            <Button onClick={this.props.addItem} color="primary">
+              Add Item
+            </Button>
+          </DialogActions>
         </Dialog>
       </div>
     )

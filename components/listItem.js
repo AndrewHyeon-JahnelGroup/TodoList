@@ -1,4 +1,7 @@
 import React from 'react';
+import li from '@material-ui/core/ListItem'
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 class ListItem extends React.Component{
 
@@ -12,7 +15,13 @@ class ListItem extends React.Component{
 
   render(){
     return(
-      <p>{this.props.item}</p>
+      <div id="listitem">
+        <p>{this.props.item}
+        <IconButton onClick={this.props.deleteItem} aria-label="delete">
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+        </p>
+      </div>
     )
   }
 

@@ -36,6 +36,27 @@ class Home extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
+  addItem(event){
+    var taskName = document.getElementById('taskname').value
+    var taskDesc = document.getElementById('taskdesc').value
+    // var taskName = document.getElementById('taskname')
+    console.log(taskName, taskDesc)
+    $.post('/list', {
+      taskName: taskName,
+      taskDescription: taskDesc
+    })
+    .then( (res) => {
+      console.log(res, 'post success')
+    })
+    .catch( (err) => {
+      console.log(err, 'post failed')
+    })
+  }
+
+  deleteItem(){
+
+  }
+
   componentDidUpdate(){
     this.render()
   }
@@ -47,6 +68,7 @@ class Home extends React.Component {
 
         return res.json()
       }).then( (data) => {
+        console.log('data', data)
         this.setState({
           itemlist: ['asfdsf', '1234554','grq3tr']
         })
@@ -60,15 +82,18 @@ class Home extends React.Component {
   render(){
     return(
       <div>
+        <div id="chooseList">
+
+        </div>
         <div id="list">
           <h3>todo list</h3>
               {this.state.itemlist.map( (item) =>   (
-                <ListItem item={item} />
+                <ListItem deleteItem={this.deleteItem} item={item} />
               ))}
         </div>
         <div id = "buttons">
           <Button variant="primary" onClick={this.openModal}>Add Item</Button>
-          <AddItemModal openModal={this.openModal} closeModal={this.closeModal} modalIsOpen={this.state.modalIsOpen} />
+          <AddItemModal openModal={this.openModal} closeModal={this.closeModal} modalIsOpen={this.state.modalIsOpen} addItem={this.addItem}/>
         </div>
       </div>
     )
