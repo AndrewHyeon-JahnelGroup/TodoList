@@ -21,8 +21,8 @@ class TaskList extends React.Component{
               <ListItem button>
                 <TaskListItem
                   number={i}
-                  itemName={item.taskName}
-                  itemDescription={item.taskDescription}
+                  itemName={item.name}
+                  itemDescription={item.description}
                   completed={item.completed}
                   editItem={this.props.editItem}
                   deleteItem={this.props.deleteItem}/>

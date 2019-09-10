@@ -7,6 +7,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler() //part of next config
 const mongoose = require('mongoose')
 const routes = require('./routes')
+const db = require('./db/index.js')
 // const db = mongoose.connect('___________PUT MONGOURLHERE__________')
 
 app.prepare()

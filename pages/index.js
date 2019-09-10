@@ -79,21 +79,7 @@ class Home extends React.Component {
       }).then( (data) => {
         console.log('data', data)
         this.setState({
-          itemlist: [
-            {
-              taskName: 'todo1',
-              taskDescription: 'todo1 description',
-              completed: false,
-              tasklist: 'urgent tasks'
-            },
-            {
-              taskName: 'todo2',
-              taskDescription: 'todo2 description',
-              completed: false,
-              tasklist: 'urgent tasks'
-            }
-
-          ]
+          itemlist: data
         })
       })
       .catch( (err) => {

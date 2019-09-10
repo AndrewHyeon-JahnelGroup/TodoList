@@ -52,6 +52,11 @@ class EditItemModal extends React.Component{
     console.log('updated', this.props)
   }
 
+  closeAndEdit(){
+    props.editItem()
+    this.props.closeModal()
+  }
+
   render(){
 
     return(
@@ -82,7 +87,7 @@ class EditItemModal extends React.Component{
             <Button onClick={this.props.closeModal} color="primary">
               Close
             </Button>
-            <Button onClick={this.props.editItem} color="primary">
+            <Button onClick={this.editItem} color="primary">
               Edit Item
             </Button>
           </DialogActions>

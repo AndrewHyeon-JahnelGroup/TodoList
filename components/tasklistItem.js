@@ -13,7 +13,7 @@ class TaskListItem extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      editModalIsOpen: false
+      editModalIsOpen: false,
     }
 
     this.openEditModal = this.openEditModal.bind(this)
@@ -31,10 +31,14 @@ class TaskListItem extends React.Component{
   }
 
   closeEditModal() {
+    console.log('closing')
     this.setState({editModalIsOpen: false});
   }
 
   componentDidUpdate(){
+    if(this.props.completed){
+      console.log('complete check')
+    }
     this.render()
   }
 
