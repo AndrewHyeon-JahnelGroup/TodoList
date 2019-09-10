@@ -31,5 +31,14 @@ router.route('/edit')
     })
   })
 
+router.route('/delete')
+  .post((req,res) => {
+    console.log(req.body, 'delete route')
+    db.deleteTask({id:req.body.id}, (err) => {
+      if(err) {
+        console.log('delete error in routess')
+      }
+    })
+  })
 
 module.exports = router

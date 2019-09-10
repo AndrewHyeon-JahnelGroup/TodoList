@@ -17,6 +17,7 @@ class TaskListItem extends React.Component{
       editModalIsOpen: false,
     }
     this.editItem = this.editItem.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
     this.openEditModal = this.openEditModal.bind(this)
     this.closeEditModal = this.closeEditModal.bind(this)
   }
@@ -39,6 +40,15 @@ class TaskListItem extends React.Component{
     })
   }
 
+  deleteItem() {
+    $.post('/list/delete', {id:this.props.id})
+    .then( (res) => {
+      console.log('delete works')
+    })
+    .catch( (err) => {
+      console.log('delete broken')
+    })
+  }
   openEditModal() {
     console.log('openclicked')
     this.setState({editModalIsOpen: true});
@@ -83,7 +93,7 @@ class TaskListItem extends React.Component{
             </IconButton>
           </ListItemIcon>
           <ListItemIcon>
-            <IconButton onClick={this.props.deleteItem} aria-label="delete">
+            <IconButton onClick={this.deleteItem} aria-label="delete">
               <DeleteIcon fontSize="small" />
             </IconButton>
           </ListItemIcon>

@@ -41,10 +41,23 @@ const editTask = (data, cb) => {
   Task.findOneAndUpdate({_id: data.id}, {$set:{name:name, description:desc}},(err, task) => {
     console.log(task)
   })
-  // Task.findOneAndUpdate({id: data.id}, {$set:{
-  //   name: data.taskName,
-  //   description: data.taskDescription
-  // }}, cb())
+
+}
+
+const deleteTask = (id, cb) => {
+  console.log(id, 'id in db')
+  Task.findById(id.id, (err, task) => {
+    if(err){
+      console.log('deletetaskerrorindb')
+    }
+    task.remove(cb())
+  })
+  // Task.remove({_id: id}, (err, data) => {
+  //   if(err){
+  //     console.log('delete task error in db')
+  //   }
+  //   cb(data)
+  // })
 }
 
 const getTasks = (cb) => {
@@ -74,6 +87,7 @@ const saveTask = (task, cb) => {
   })
 }
 
+module.exports.deleteTask = deleteTask
 module.exports.editTask = editTask
 module.exports.getTasks = getTasks
 module.exports.saveTask = saveTask
