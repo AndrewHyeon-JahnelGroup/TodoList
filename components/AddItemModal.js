@@ -50,9 +50,6 @@ class AddItemModal extends React.Component{
     }
   }
 
-  componentDidUpdate(){
-    console.log('updated', this.props)
-  }
 
   render(){
 
@@ -84,7 +81,7 @@ class AddItemModal extends React.Component{
             <Button onClick={this.props.closeModal} color="primary">
               Close
             </Button>
-            <Button onClick={this.props.addItem} color="primary">
+            <Button class="addbutton" onClick={this.props.addItem} color="primary">
               Add Item
             </Button>
           </DialogActions>

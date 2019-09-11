@@ -1,9 +1,9 @@
 import React from 'react';
-import EditItemModal from '../components/EditItemModal'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
+import EditItemModal from '../components/EditItemModal';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
@@ -70,7 +70,7 @@ class TaskListItem extends React.Component{
     if(this.props.completed){
       console.log('complete check')
     }
-    this.render()
+
   }
 
 

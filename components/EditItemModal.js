@@ -48,9 +48,7 @@ class EditItemModal extends React.Component{
 
   }
 
-  componentDidUpdate(){
-    console.log('updated', this.props)
-  }
+
 
   closeAndEdit(){
     props.editItem()

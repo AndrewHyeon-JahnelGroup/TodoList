@@ -22,8 +22,6 @@ class Home extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.editItem = this.editItem.bind(this)
-    this.deleteItem = this.deleteItem.bind(this)
   }
 
   openModal() {
@@ -58,21 +56,13 @@ class Home extends React.Component {
     })
   }
 
-  deleteItem(){
-    console.log('delete working')
-  }
-
-  editItem(id){
-    console.log('edit working')
-  }
-
   componentDidUpdate(){
     fetch('http://localhost:3000/list', {method:'GET'})
       .then( (res) => {
 
         return res.json()
       }).then( (data) => {
-        console.log('data', data)
+        console.log('dataupdate', data)
         this.setState({
           itemlist: data
         })
@@ -80,7 +70,6 @@ class Home extends React.Component {
       .catch( (err) => {
         console.log(err)
       })
-    this.render()
   }
 
   componentDidMount(){
@@ -103,20 +92,19 @@ class Home extends React.Component {
 
   render(){
     return(
-      <div>
+      <div class='todolist'>
         <div id="chooseList">
 
         </div>
         <div id="list">
           <TaskList
-            editItem={this.editItem}
-            deleteItem={this.deleteItem}
             itemlist={this.state.itemlist}
           />
         </div>
         <div id = "buttons">
-          <Button variant="primary" onClick={this.openModal}>Add Item</Button>
+          <Button id="addbutton" variant="primary" onClick={this.openModal}>Add Item</Button>
           <AddItemModal
+            id="addmodal"
             openModal={this.openModal}
             closeModal={this.closeModal}
             modalIsOpen={this.state.modalIsOpen}
