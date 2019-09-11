@@ -39,6 +39,7 @@ const editTask = (data, cb) => {
   var name = data.taskName
   var desc = data.taskDescription
   Task.findOneAndUpdate({_id: data.id}, {$set:{name:name, description:desc}},(err, task) => {
+    console.log(err, task)
     cb()
   })
 

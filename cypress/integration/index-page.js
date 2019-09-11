@@ -37,12 +37,12 @@ describe("index page", () => {
       })
   })
 
-  // it('should respond success when editing task', () => {
-  //   cy.request('POST', '/list/edit')
-  //     .then( (res) => {
-  //       expect(res.status).to.equal(200)
-  //     })
-  // })
+  it('should respond success when editing task', () => {
+    cy.request('POST', '/list/edit')
+      .then( (res) => {
+        expect(res.status).to.equal(200)
+      })
+  })
 
   it('should respond success when deleting task', () => {
     cy.request('POST', '/list/delete')

@@ -41,7 +41,6 @@ router.route('/delete')
       if(err) {
         console.log('delete error in routess')
       }else{
-        console.log('into response')
         res.status(200).send()
       }
     })
