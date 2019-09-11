@@ -45,6 +45,7 @@ class TaskListItem extends React.Component{
   deleteItem() {
     $.post('/list/delete', {id:this.props.id})
     .then( (res) => {
+      this.props.fetch()
       console.log('delete works')
     })
     .catch( (err) => {
