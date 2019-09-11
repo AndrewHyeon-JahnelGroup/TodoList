@@ -41,7 +41,6 @@ router.route('/edit')
         if(err){
           console.log('edit error')
         }else{
-
           res.status(200).send()
         }
 

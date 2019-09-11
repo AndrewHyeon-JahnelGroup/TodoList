@@ -18,6 +18,10 @@ describe("index page", () => {
     cy.get('.deletebutton').click()
   })
 
+  it('Completed checkbox should toggle strike through', () => {
+    
+  })
+
   // it('edit task', () => {
   //
   // }
