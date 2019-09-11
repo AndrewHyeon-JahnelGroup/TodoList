@@ -15,12 +15,35 @@ class TaskListItem extends React.Component{
     super(props)
     this.state = {
       editModalIsOpen: false,
-      completed: this.props.completed
+      strike: this.props.completed
     }
     this.editItem = this.editItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
     this.openEditModal = this.openEditModal.bind(this)
     this.closeEditModal = this.closeEditModal.bind(this)
+    this.toggleComplete = this.toggleComplete.bind(this)
+  }
+
+  toggleComplete(){
+    var current = this.props.completed
+    current = !current
+
+    $.post('/list/edit/completed', {
+      id:this.props.id,
+      taskName: this.props.itemName,
+      taskDescription: this.props.itemDescription,
+      completed: current
+    })
+    .then( (res) => {
+      console.log('toggleworks')
+      this.setState({
+        strike: !this.state.strike
+      })
+      this.props.fetch()
+    })
+    .catch( (err) => {
+      console.log('error in toggle compelte')
+    })
   }
 
   editItem() {
@@ -68,16 +91,14 @@ class TaskListItem extends React.Component{
     this.setState({editModalIsOpen: false});
   }
 
-  componentDidUpdate(){
-    if(this.props.completed){
-      console.log('complete check')
-    }
-
-  }
-
-
   render(){
-
+    let style = {
+      textDecorationLine: ''
+    }
+    if(this.state.strike){
+      style.textDecorationLine = 'line-through'
+    }
+    console.log(style)
     return(
       <div id="listitem">
         <ListItem>
@@ -85,13 +106,14 @@ class TaskListItem extends React.Component{
             <p>{this.props.number}</p>
           </ListItemIcon>
           <ListItemText
+            style={style}
             class='listitemtext'
             primary={this.props.itemName}
             secondary={this.props.itemDescription}
           />
           <ListItemIcon>
             <p>Completed</p>
-            <Checkbox  />
+            <Checkbox checked={this.state.strike} onClick={this.toggleComplete} />
           </ListItemIcon>
           <ListItemIcon>
             <IconButton onClick={this.openEditModal} aria-label="delete">

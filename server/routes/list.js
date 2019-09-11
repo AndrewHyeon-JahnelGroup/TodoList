@@ -34,6 +34,20 @@ router.route('/edit')
     })
   })
 
+  router.route('/edit/completed')
+    .post((req,res) => {
+      console.log(req.body, 'edit request body')
+      db.editTaskComp(req.body, (err) => {
+        if(err){
+          console.log('edit error')
+        }else{
+
+          res.status(200).send()
+        }
+
+      })
+    })
+
 router.route('/delete')
   .post((req,res) => {
     console.log(req.body, 'delete route')

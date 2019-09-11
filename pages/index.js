@@ -79,7 +79,7 @@ class Home extends React.Component {
         .catch( (err) => {
           console.log(err)
         })
-      this.setState({modalIsOpen: false});
+
       console.log(res, 'post success')
     })
     .catch( (err) => {

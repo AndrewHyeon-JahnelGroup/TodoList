@@ -45,6 +45,16 @@ const editTask = (data, cb) => {
 
 }
 
+const editTaskComp = (data, cb) => {
+  console.log(data, 'data in edittask')
+  var completed = data.completed
+  Task.findOneAndUpdate({_id: data.id}, {$set:{completed: completed}},(err, task) => {
+    console.log(err, task)
+    cb()
+  })
+
+}
+
 const deleteTask = (id, cb) => {
   console.log(id, 'id in db')
   Task.findById(id.id, (err, task) => {
@@ -95,6 +105,7 @@ const saveTask = (task, cb) => {
 
 module.exports.deleteTask = deleteTask
 module.exports.editTask = editTask
+module.exports.editTaskComp = editTaskComp
 module.exports.getTasks = getTasks
 module.exports.saveTask = saveTask
 module.exports.db = db
