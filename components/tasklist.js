@@ -14,7 +14,7 @@ class TaskList extends React.Component{
     var i = 0
     return(
       <div>
-        <List subheader={<ListSubheader>To Do List</ListSubheader>}>
+        <List class='list' subheader={<ListSubheader>To Do List</ListSubheader>}>
           {(this.props.itemlist).map( (item) => {
             i++
             return(

@@ -26,6 +26,9 @@ router.route('/edit')
     db.editTask(req.body, (err) => {
       if(err){
         console.log('edit error')
+      }else{
+
+        res.status(200).send()
       }
 
     })
@@ -37,6 +40,9 @@ router.route('/delete')
     db.deleteTask({id:req.body.id}, (err) => {
       if(err) {
         console.log('delete error in routess')
+      }else{
+        console.log('into response')
+        res.status(200).send()
       }
     })
   })

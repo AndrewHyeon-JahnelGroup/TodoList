@@ -79,10 +79,11 @@ class TaskListItem extends React.Component{
     return(
       <div id="listitem">
         <ListItem>
-        <ListItemIcon>
-          <p>{this.props.number}</p>
-        </ListItemIcon>
+          <ListItemIcon>
+            <p>{this.props.number}</p>
+          </ListItemIcon>
           <ListItemText
+            class='listitemtext'
             primary={this.props.itemName}
             secondary={this.props.itemDescription}
           />
@@ -95,7 +96,7 @@ class TaskListItem extends React.Component{
               <EditIcon fontSize="small" />
             </IconButton>
           </ListItemIcon>
-          <ListItemIcon>
+          <ListItemIcon class="deletebutton">
             <IconButton onClick={this.deleteItem} aria-label="delete">
               <DeleteIcon fontSize="small" />
             </IconButton>

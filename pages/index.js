@@ -15,7 +15,7 @@ class Home extends React.Component {
     this.state = {
       tasklists: [],
       currentlist: '',
-      itemlist: [1,2,3,4,5,6],
+      itemlist: [],
       modalIsOpen: false,
     }
     this.addItem = this.addItem.bind(this)

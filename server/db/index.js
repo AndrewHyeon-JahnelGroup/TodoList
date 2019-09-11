@@ -39,7 +39,7 @@ const editTask = (data, cb) => {
   var name = data.taskName
   var desc = data.taskDescription
   Task.findOneAndUpdate({_id: data.id}, {$set:{name:name, description:desc}},(err, task) => {
-    console.log(task)
+    cb()
   })
 
 }
@@ -49,8 +49,13 @@ const deleteTask = (id, cb) => {
   Task.findById(id.id, (err, task) => {
     if(err){
       console.log('deletetaskerrorindb')
+    }else{
+      if(task){
+        task.remove(cb())
+      }else{
+        cb()
+      }
     }
-    task.remove(cb())
   })
   // Task.remove({_id: id}, (err, data) => {
   //   if(err){
