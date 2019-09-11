@@ -45,14 +45,13 @@ const styles = {
 class EditItemModal extends React.Component{
   constructor(props){
     super(props)
-
+    this.closeAndEdit = this.closeAndEdit.bind(this)
   }
 
-
-
   closeAndEdit(){
-    props.editItem()
+    this.props.editItem()
     this.props.closeModal()
+
   }
 
   render(){
@@ -85,7 +84,7 @@ class EditItemModal extends React.Component{
             <Button onClick={this.props.closeModal} color="primary">
               Close
             </Button>
-            <Button onClick={this.props.editItem} color="primary">
+            <Button onClick={this.closeAndEdit} color="primary">
               Edit Item
             </Button>
           </DialogActions>

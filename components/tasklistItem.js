@@ -35,6 +35,7 @@ class TaskListItem extends React.Component{
     })
     .then( (res) => {
       console.log('update works')
+      this.props.fetch()
     })
     .catch( (err) => {
       console.log('update error')

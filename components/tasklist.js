@@ -26,7 +26,9 @@ class TaskList extends React.Component{
                   itemDescription={item.description}
                   completed={item.completed}
                   editItem={this.props.editItem}
-                  deleteItem={this.props.deleteItem}/>
+                  deleteItem={this.props.deleteItem}
+                  fetch={this.props.fetch}
+                  />
               </ListItem>
             )
           })}

@@ -22,6 +22,7 @@ class Home extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.fetchData = this.fetchData.bind(this)
   }
 
   openModal() {
@@ -32,6 +33,22 @@ class Home extends React.Component {
   afterOpenModal() {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#f00';
+  }
+
+  fetchData(){
+    fetch('http://localhost:3000/list', {method:'GET'})
+      .then( (res) => {
+
+        return res.json()
+      }).then( (data) => {
+        console.log('dataupdate', data)
+        this.setState({
+          itemlist: data,
+        })
+      })
+      .catch( (err) => {
+        console.log(err)
+      })
   }
 
   closeModal() {
@@ -48,28 +65,26 @@ class Home extends React.Component {
       taskDescription: taskDesc
     })
     .then( (res) => {
+      fetch('http://localhost:3000/list', {method:'GET'})
+        .then( (res) => {
+
+          return res.json()
+        }).then( (data) => {
+          console.log('dataupdate', data)
+          this.setState({
+            itemlist: data,
+            modalIsOpen: false
+          })
+        })
+        .catch( (err) => {
+          console.log(err)
+        })
       this.setState({modalIsOpen: false});
       console.log(res, 'post success')
     })
     .catch( (err) => {
       console.log(err, 'post failed')
     })
-  }
-
-  componentDidUpdate(){
-    fetch('http://localhost:3000/list', {method:'GET'})
-      .then( (res) => {
-
-        return res.json()
-      }).then( (data) => {
-        console.log('dataupdate', data)
-        this.setState({
-          itemlist: data
-        })
-      })
-      .catch( (err) => {
-        console.log(err)
-      })
   }
 
   componentDidMount(){
@@ -99,6 +114,7 @@ class Home extends React.Component {
         <div id="list">
           <TaskList
             itemlist={this.state.itemlist}
+            fetch={this.fetchData}
           />
         </div>
         <div id = "buttons">
@@ -109,6 +125,7 @@ class Home extends React.Component {
             closeModal={this.closeModal}
             modalIsOpen={this.state.modalIsOpen}
             addItem={this.addItem}
+            itemlist={this.state.itemlist}
           />
         </div>
       </div>
