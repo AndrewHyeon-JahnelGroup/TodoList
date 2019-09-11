@@ -59,4 +59,9 @@ router.route('/delete')
     })
   })
 
+router.route('/signin')
+  .post( (req,res) => {
+    res.redirect('/login')
+  })
+
 module.exports = router

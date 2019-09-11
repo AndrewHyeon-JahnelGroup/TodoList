@@ -16,12 +16,12 @@ db.once('open', () => {
 // const userSchema = mongoose.Schema({
 //   id: {type:Number, unique: true},
 //   name: String,
-//   tasklists: [List]
+//   tasklists: Array
 // })
 //
 // const listSchema = mongoose.Schema({
 //   id: {type: Number, unique: true},
-//   tasks: [Task]
+//   tasks: Array
 // })
 
 const taskSchema = mongoose.Schema({
@@ -68,12 +68,6 @@ const deleteTask = (id, cb) => {
       }
     }
   })
-  // Task.remove({_id: id}, (err, data) => {
-  //   if(err){
-  //     console.log('delete task error in db')
-  //   }
-  //   cb(data)
-  // })
 }
 
 const getTasks = (cb) => {
@@ -86,7 +80,9 @@ const getTasks = (cb) => {
 }
 
 const saveUser = (user, cb) => {
+  const newUser = new User({
 
+  })
 }
 
 const saveTask = (task, cb) => {

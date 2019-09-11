@@ -93,7 +93,13 @@ class TaskListItem extends React.Component{
 
   render(){
     let style = {
-      textDecorationLine: ''
+      textDecorationLine: '',
+      head: {
+        fontSize:'20px'
+      },
+      item:{
+        width:'100R%'
+      }
     }
     if(this.state.strike){
       style.textDecorationLine = 'line-through'
@@ -101,7 +107,7 @@ class TaskListItem extends React.Component{
     console.log(style)
     return(
       <div id="listitem">
-        <ListItem>
+        <ListItem style={style.item}>
           <ListItemIcon>
             <p>{this.props.number}</p>
           </ListItemIcon>

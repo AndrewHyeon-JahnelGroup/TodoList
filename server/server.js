@@ -1,6 +1,9 @@
 const express = require('express')
 const next = require('next')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 const PORT = process.env.PORT || 3000
 const dev = process.env.NODE_DEV !== 'production' //true false
 const app = next({ dev })
@@ -15,6 +18,9 @@ app.prepare()
     const app = express()
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(cookieParser())
+    app.use(passport.initialize())
+    app.use(passport.session())
     app.use('/list', routes.list)
     app.get('*', (req,res) => {
       return handle(req,res)

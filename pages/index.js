@@ -4,8 +4,9 @@ import Head from 'next/head'
 import Nav from '../components/nav'
 import AddItemModal from '../components/AddItemModal'
 import TaskList from '../components/TaskList'
-import { Button } from 'react-bootstrap'
-import $ from 'jquery'
+import Login from '../components/Login'
+import Button from '@material-ui/core/Button';
+import $ from 'axios'
 import fetch from 'isomorphic-fetch'
 
 class Home extends React.Component {
@@ -23,6 +24,10 @@ class Home extends React.Component {
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.fetchData = this.fetchData.bind(this)
+  }
+
+  signIn(){
+    $.post('/list/signin')
   }
 
   openModal() {
@@ -88,7 +93,6 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-
     fetch('http://localhost:3000/list', {method:'GET'})
       .then( (res) => {
 
@@ -106,27 +110,56 @@ class Home extends React.Component {
   }
 
   render(){
-    return(
-      <div class='todolist'>
-        <div id="chooseList">
+    var style = {
+      top:{
 
-        </div>
-        <div id="list">
-          <TaskList
-            itemlist={this.state.itemlist}
-            fetch={this.fetchData}
-          />
-        </div>
-        <div id = "buttons">
-          <Button id="addbutton" variant="primary" onClick={this.openModal}>Add Item</Button>
-          <AddItemModal
-            id="addmodal"
-            openModal={this.openModal}
-            closeModal={this.closeModal}
-            modalIsOpen={this.state.modalIsOpen}
-            addItem={this.addItem}
-            itemlist={this.state.itemlist}
-          />
+      },
+      list:{
+        width:'50%',
+        margin: '100px',
+        borderStyle:'solid',
+        borderWidth:'3px',
+
+      },
+      button: {
+        marginRight: '0px'
+      },
+      title:{
+        textAlign:'center'
+      }
+    }
+    return(
+      <div class='top'>
+        <div class='todolist' style={style.list}>
+          <h3 class='title' style={style.title}>JG Forward Motion Project</h3>
+          <div id="chooseList">
+            <Link href='/login'>
+              <Button onClick={this.signIn}>Sign In</Button>
+            </Link>
+          </div>
+
+          <div id="list">
+            <TaskList
+              itemlist={this.state.itemlist}
+              fetch={this.fetchData}
+            />
+          </div>
+          <div id = "buttons">
+            <Button
+              id="addbutton"
+              variant="contained"
+              color="primary"
+              onClick={this.openModal}
+            >Add Item</Button>
+            <AddItemModal
+              id="addmodal"
+              openModal={this.openModal}
+              closeModal={this.closeModal}
+              modalIsOpen={this.state.modalIsOpen}
+              addItem={this.addItem}
+              itemlist={this.state.itemlist}
+            />
+          </div>
         </div>
       </div>
     )

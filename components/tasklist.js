@@ -12,15 +12,25 @@ class TaskList extends React.Component{
   render(){
     console.log(this.props, 'intasklist')
     var i = 0
+    var style = {
+      head: {
+        textSize:'10px',
+        color:'primary'
+      },
+      listitem: {
+        width: '100%'
+      }
+    }
     return(
       <div>
-        <List class='list' subheader={<ListSubheader>To Do List</ListSubheader>}>
+        <List class='list' subheader={<ListSubheader style={style.head}>To Do List</ListSubheader>}>
           {(this.props.itemlist).map( (item) => {
             i++
             return(
               <ListItem button>
                 <TaskListItem
                   id={item._id}
+                  style={style.listitem}
                   number={i}
                   itemName={item.name}
                   itemDescription={item.description}
