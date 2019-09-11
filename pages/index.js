@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import Nav from '../components/nav'
 import AddItemModal from '../components/AddItemModal'
 import TaskList from '../components/TaskList'
 import Login from '../components/Login'
@@ -130,12 +129,19 @@ class Home extends React.Component {
     }
     return(
       <div class='top'>
+      
+        <Head>
+          <title>ToDo List</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.2, width=device-width"
+            key="viewport"
+          />
+        </Head>
+
         <div class='todolist' style={style.list}>
           <h3 class='title' style={style.title}>JG Forward Motion Project</h3>
           <div id="chooseList">
-            <Link href='/login'>
-              <Button onClick={this.signIn}>Sign In</Button>
-            </Link>
           </div>
 
           <div id="list">
@@ -151,6 +157,10 @@ class Home extends React.Component {
               color="primary"
               onClick={this.openModal}
             >Add Item</Button>
+            <Link href='/login'>
+              <Button variant="contained"
+              color="primary"onClick={this.signIn}>Sign In</Button>
+            </Link>
             <AddItemModal
               id="addmodal"
               openModal={this.openModal}
