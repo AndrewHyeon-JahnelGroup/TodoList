@@ -1,5 +1,5 @@
 import React from 'react'
-import SignIn from '../components/Login'
+import SignIn from '../components/SignIn'
 
 class Login extends React.Component{
   constructor(props){

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Head from 'next/head'
 import AddItemModal from '../components/AddItemModal'
 import TaskList from '../components/TaskList'
-import Login from '../components/Login'
 import Button from '@material-ui/core/Button';
 import $ from 'axios'
 import fetch from 'isomorphic-fetch'
@@ -129,7 +128,7 @@ class Home extends React.Component {
     }
     return(
       <div class='top'>
-      
+
         <Head>
           <title>ToDo List</title>
           <meta
