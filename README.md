@@ -2,11 +2,11 @@ Alt-Jahnel Group Forward Motion Project #1: ToDo List
 ====================
 Alt-Table of Contents
 ---------------------
-###1. Stack (MERN)
-###2. Archtecture and Wireframes
-###3. Prerequisites
-###4. Setup
-###5. Deploying
+### 1. Stack (MERN)
+### 2. Archtecture and Wireframes
+### 3. Prerequisites
+### 4. Setup
+### 5. Deploying
 
 1. Alt-Stack(MERN)
 ---------------
