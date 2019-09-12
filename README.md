@@ -1,14 +1,15 @@
-Alt-Jahnel Group Forward Motion Project #1: ToDo List
+Jahnel Group Forward Motion Project #1: ToDo List
 ====================
-Alt-Table of Contents
+Table of Contents
 ---------------------
 ### 1. Stack (MERN)
 ### 2. Archtecture and Wireframes
 ### 3. Prerequisites
 ### 4. Setup
 ### 5. Deploying
+------------------------
 
-1. Alt-Stack(MERN)
+1. Stack(MERN)
 ---------------
 
 This TodoList application was built using MongoDB, Express, React, and Node.
@@ -20,3 +21,20 @@ Express: Server framework to handle REST API requests to database. Passport.js w
 React: React provided a lightweight framework to configure the frontend client. The NextJS library for React lets us serve static files from the server with ease instead of having to deal with ejs/jsx/jade partials.
 
 Node: Server I/O handling and package manager
+
+2. Architecture and Wireframes
+------------------------------------
+
+3. Prerequisites
+-------------
+
+You will need to install Node, MongoDB, and Redis
+
+4. Setup
+-----------------
+
+1. Clone the repo
+2. Run 'npm install' in bash/cmd inside the root todolist directory to install dependencies
+3. Run 'mongo' and 'mongos' commands from the command line to turn on mongodb and the mongodb shell
+4. Run 'redis start' to initialize in-memory database for authentication
+5. Start the app
