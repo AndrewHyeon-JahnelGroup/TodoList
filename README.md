@@ -25,6 +25,7 @@ Node: Server I/O handling and package manager
 2. Architecture and Wireframes
 ------------------------------------
 
+![App Architecture Diagram](/images/archdi.jpeg)
 
 
 3. Prerequisites
