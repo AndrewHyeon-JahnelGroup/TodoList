@@ -40,7 +40,7 @@ class MyApp extends App {
 
     const style = {
       marginTop: '50px',
-      backgroundColor: 'white',
+      backgroundColor: '#D5CAFA',
       WebkitBoxShadow: 'inset 3px 3px 5px 0px rgba(0,0,0,0.75)',
       MozBoxShadow: 'inset 3px 3px 5px 0px rgba(0,0,0,0.75)',
       boxShadow: 'inset 3px 3px 5px 0px rgba(0,0,0,0.75)',

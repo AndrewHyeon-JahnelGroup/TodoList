@@ -36,8 +36,10 @@ class TaskList extends React.Component{
       listitem: {
         minWidth: '650'
       },
-      listitem: {
-        width: '100%'
+      list:{
+        WebkitBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)'
       }
     }
 

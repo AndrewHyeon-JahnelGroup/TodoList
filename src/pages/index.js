@@ -55,6 +55,7 @@ class Index extends React.Component{
     this.changeList = this.changeList.bind(this)
     this.addTask = this.addTask.bind(this)
     this.getTask = this.getTask.bind(this)
+    this.ifList = this.ifList.bind(this)
 
   }
 
@@ -180,6 +181,34 @@ class Index extends React.Component{
     })
   }
 
+  ifList(){
+    const styles = {
+      input:{
+        marginTop: '20px',
+        width: '100%',
+        background: '#D5CAFA'
+      },
+      add:{
+        width: '100%',
+      },
+      delete:{
+        marginTop: '20px',
+        width: '100%',
+
+      }
+    }
+    if(this.state.listname === ''){
+      return(<div />)
+    }
+    return (
+      <div>
+      <TextField variant="filled" id='newtaskname' style={styles.input}/>
+      <Button color="primary" variant="contained" onClick={this.addTask} style={styles.add}>Add New Task</Button>
+      <Button color="primary" variant="contained" style={styles.delete} onClick={this.openDeleteModal}> Delete List </Button>
+      </div>
+    )
+  }
+
   render(){
 
     const styles = {
@@ -196,6 +225,7 @@ class Index extends React.Component{
         width: '100%',
       },
       inputMenu: {
+        background: '#7B61FF',
         padding: '5px',
         paddingLeft: '20px',
         paddingRight: '20px',
@@ -204,37 +234,52 @@ class Index extends React.Component{
         textAlign: 'center',
         border: '1px solid black',
         borderRadius: '10px',
-        borderColor: '#FF3CD1'
+        WebkitBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)'
       },
       top:{
         marginTop: '50px'
       },
       input:{
         marginTop: '20px',
+        background: '#D5CAFA'
 
       },
       select: {
-        marginTop: '20px'
+        marginTop: '20px',
+        marginBotto:'20px',
+        background: '#D5CAFA'
       },
       deleteModal: {
-
         position: 'absolute',
         width: 400,
         border: '2px solid #000',
       },
       form:{
         width: '100%'
+      },
+      logout:{
+        color: 'white'
+      },
+      add:{
+        width: '100%',
       }
     }
 
     return(
       <Container style={styles.title}>
-      <Button>
-      <Link href="/logout">
-        <a className="nav-link">Log Out</a>
-      </Link>
-      </Button>
+      <div class='row'>
+        <div class="col-md-10">
         <h2 style={styles.title} class="display-6 center-align">Forward Motion Project: Todo list</h2>
+        </div>
+        <div class="col-md-2">
+        <Button color="primary" variant="contained">
+        <Link style={styles.logout} href="/logout">Log Out</Link>
+        </Button>
+        </div>
+      </div>
+
         <Divider />
           <div class="row" style={styles.top}>
             <div class="col-md-3" style={styles.inputMenu}>
@@ -266,12 +311,9 @@ class Index extends React.Component{
 
 
                 <TextField variant="filled" id='newlistname' style={styles.input}/>
-                <Button variant="primary" onClick={this.addList}>Add New List</Button>
+                <Button style={styles.add} color="primary" variant="contained" onClick={this.addList}>Add New List</Button>
 
-                <TextField variant="filled" id='newtaskname' style={styles.input}/>
-                <Button variant="primary" onClick={this.addTask}>Add New Task</Button>
-
-                <Button style={styles.input} onClick={this.openDeleteModal}> Delete List </Button>
+                {this.ifList()}
                 <Container>
                 <Dialog
                   aria-labelledby="simple-modal-title"

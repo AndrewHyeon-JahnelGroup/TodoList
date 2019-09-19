@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
 
   render() {
     const style = {
-      background: '#47173A',
+      background: '#201942',
 
     }
     return (

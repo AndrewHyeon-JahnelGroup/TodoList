@@ -4,6 +4,8 @@ import IndexMock from './index'
 jest.mock('./index', function() {
   var tasks = []
   var lists = []
+  var currentList = ''
+  var currentTasks = []
 
   return class Index{
 
@@ -14,6 +16,18 @@ jest.mock('./index', function() {
     deleteList(list){
       return lists.splice(lists.indexOf(list), 1)
     }
+
+    changelist(list){
+      currentList = list
+      currentTasks = []
+      var temp = []
+      for(var i = 0; i < tasks.length; i++){
+        if(tasks[i].user === list.user && tasks[i].list === list){
+          currentTasks.push(tasks[i])
+        }
+      }
+      return currentTasks
+    })
 
     addTask(task){
       return tasks.push(task)
