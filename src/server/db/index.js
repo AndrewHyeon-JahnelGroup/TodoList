@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema({
 const listSchema = mongoose.Schema({
   user: String,
   name: String,
-  tasks: Array
 })
 
 const taskSchema = mongoose.Schema({

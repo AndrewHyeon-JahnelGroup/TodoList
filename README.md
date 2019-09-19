@@ -6,7 +6,6 @@ Table of Contents
 ### 2. Archtecture and Wireframes
 ### 3. Prerequisites
 ### 4. Setup
-### 5. Deploying
 ------------------------
 
 1. Stack(MERN)
@@ -25,19 +24,21 @@ Node: Server I/O handling and package manager
 2. Architecture and Wireframes
 ------------------------------------
 
+Architecture Diagram
 ![App Architecture Diagram](/images/archdi.jpeg)
 
+Database Schema
+![Database Schema](/images/dbschema.jpeg)
 
 3. Prerequisites
 -------------
 
-You will need to install Node, MongoDB, and Redis
+You will need to install Node, npm, and MongoDB
 
 4. Setup
 -----------------
 
 1. Clone the repo
 2. Run 'npm install' in bash/cmd inside the root todolist directory to install dependencies
-3. Run 'mongo' and 'mongos' commands from the command line to turn on mongodb and the mongodb shell
-4. Run 'redis start' to initialize in-memory database for authentication
-5. Start the app
+3. Run 'mongo' and 'mongod' commands from the command line to turn on mongodb
+5. Start the app by running 'npm run dev'

@@ -1,0 +1,1 @@
+import IndexMock from './index'
