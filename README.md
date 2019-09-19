@@ -28,6 +28,9 @@ Architecture Diagram
 ![App Architecture Diagram](/images/archdi.jpeg)
 
 Database Schema
+
+
+
 ![Database Schema](/images/dbschema.jpeg)
 
 3. Prerequisites
