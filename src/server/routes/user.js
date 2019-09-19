@@ -136,15 +136,5 @@ router.post("/edit/completed", restrictAccess, (req, res) => {
   })
 })
 
-router.post("/thoughts", (req, res) => {
-  const { message } = req.body;
-  const newThought = {
-    _id: new Date().getTime(),
-    message,
-    author: "unknown"
-  };
-  thoughts.push(newThought);
-  res.send({ message: "Thanks!" });
-});
 
 module.exports = router;

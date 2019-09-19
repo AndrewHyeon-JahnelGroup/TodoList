@@ -40,6 +40,10 @@ class TaskList extends React.Component{
         width: '100%'
       }
     }
+
+    if(this.props.listname === ''){
+      return <div></div>
+    }
     return(
       <Paper style={style.list}>
         <Table style={style.listitem}>

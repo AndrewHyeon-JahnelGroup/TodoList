@@ -12,8 +12,10 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Modal from '@material-ui/core/Modal'
 import Dialog from '@material-ui/core/Dialog'
 import Divider from "@material-ui/core/Divider"
+import Link from "@material-ui/core/Link"
 import $ from 'axios';
 
+import NavBar from '../components/Navbar'
 import TaskList from '../components/TaskList'
 import AddItemModal from '../components/AddItemModal'
 
@@ -201,7 +203,8 @@ class Index extends React.Component{
         marginRight: '50px',
         textAlign: 'center',
         border: '1px solid black',
-        borderRadius: '10px'
+        borderRadius: '10px',
+        borderColor: '#FF3CD1'
       },
       top:{
         marginTop: '50px'
@@ -226,13 +229,18 @@ class Index extends React.Component{
 
     return(
       <Container style={styles.title}>
+      <Button>
+      <Link href="/logout">
+        <a className="nav-link">Log Out</a>
+      </Link>
+      </Button>
         <h2 style={styles.title} class="display-6 center-align">Forward Motion Project: Todo list</h2>
         <Divider />
           <div class="row" style={styles.top}>
             <div class="col-md-3" style={styles.inputMenu}>
               <FormControl style={styles.form} variant='filled'>
                 <InputLabel htmlFor="age-label-placeholder">
-                Current Task List
+                Choose a Tasklist
                 </InputLabel>
                 <Select
                   id="filled-select"
@@ -243,7 +251,7 @@ class Index extends React.Component{
                   margin="normal"
                   variant="filled"
                   inputProps={{
-                    name: 'Choose List',
+                    name: 'choose list',
                     id: 'age-native-simple',
                   }}
                 >
@@ -259,7 +267,6 @@ class Index extends React.Component{
 
                 <TextField variant="filled" id='newlistname' style={styles.input}/>
                 <Button variant="primary" onClick={this.addList}>Add New List</Button>
-
 
                 <TextField variant="filled" id='newtaskname' style={styles.input}/>
                 <Button variant="primary" onClick={this.addTask}>Add New Task</Button>
@@ -287,15 +294,16 @@ class Index extends React.Component{
                   <h3>{this.state.listname === '' ? 'Choose a tasklist' : 'Tasks in ' + this.state.listname}</h3>
                 </div>
               </div>
-              <div class="row">
 
-                <TaskList
-                  itemlist={this.state.tasks}
-                  fetch={this.getTask}
-                  style={styles.root}
-                />
+              <TaskList
+                listname={this.state.listname}
+                itemlist={this.state.tasks}
+                fetch={this.getTask}
+                style={styles.root}
+              />
 
-              </div>
+
+
             </div>
 
 
