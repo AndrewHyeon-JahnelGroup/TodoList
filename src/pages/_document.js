@@ -29,10 +29,11 @@ export default class MyDocument extends Document {
   }
 
   render() {
+    
     const style = {
       background: '#201942',
-
     }
+
     return (
       <Html>
         <Head>

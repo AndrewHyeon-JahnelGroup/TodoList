@@ -34,7 +34,7 @@ class Index extends React.Component{
 
   static async getInitialProps({req, res}){
     if(req.user){
-      console.log('here343')
+
       const username = req.user._json.name
       const baseURL = req ? `${req.protocol}://${req.get("Host")}` : "";
       const res = await fetch(`${baseURL}/user/tasklist/username/?username=${username}`, {method:'GET'})
@@ -47,7 +47,6 @@ class Index extends React.Component{
   }
 
   constructor(props){
-    console.log(props, 'PROPSSSS')
     super(props)
 
     this.state = {
@@ -73,7 +72,6 @@ class Index extends React.Component{
   }
 
   openModal() {
-    console.log('openclicked')
     this.setState({modalIsOpen: true});
   }
 
@@ -106,10 +104,6 @@ class Index extends React.Component{
         return
       }
     }
-    console.log(this.props,  {
-      user: this.props.user.displayName,
-      name: document.getElementById('newlistname').value
-    })
     $.post('/user/tasklist/add', {
       user: this.props.user.displayName,
       name: document.getElementById('newlistname').value
@@ -161,7 +155,6 @@ class Index extends React.Component{
 
     $.get('/user/task', {params: {list: event.target.value}})
     .then( (data) => {
-      console.log(data, event.target.value, 'changelist res')
       this.setState({
         listname: event.target.value,
         tasks: data.data
@@ -203,10 +196,8 @@ class Index extends React.Component{
   }
 
   getTask(){
-    console.log(this.state.listname, 'LISTNAME IN GETTASK')
     $.get('/user/task/get', {params: {list: this.state.listname}})
     .then( (data) => {
-      console.log(data, this.state, 'client data log')
       this.setState({
         tasks: data.data
       })
@@ -324,97 +315,95 @@ class Index extends React.Component{
 
     return(
       <Container style={styles.title}>
-      <div class='row'>
-        <div class="col-md-10">
-        <h2 style={styles.title} class="display-6 center-align">Forward Motion Project: Todo list</h2>
-        <Divider />
+        <div class='row'>
+          <div class="col-md-10">
+            <h2 style={styles.title} class="display-6 center-align">Forward Motion Project: Todo list</h2>
+            <Divider />
+          </div>
+          <div class="col-md-2">
+            <Fab style={styles.loButt} color="primary" variant="contained">
+              <Link style={styles.logout} href="/logout">Log Out</Link>
+            </Fab>
+          </div>
         </div>
-        <div class="col-md-2">
-          <Fab style={styles.loButt} color="primary" variant="contained">
-            <Link style={styles.logout} href="/logout">Log Out</Link>
-          </Fab>
+        <Divider />
+        <div class="row" style={styles.top}>
+          <div class="col-md-3" style={styles.inputMenu}>
+            <FormControl style={styles.form} variant='filled'>
+              <InputLabel htmlFor="age-label-placeholder">
+                Choose a Tasklist
+              </InputLabel>
+              <Select
+                id="filled-select"
+                label="Select"
+                style={styles.select}
+                class="toprow"
+                onChange={this.changeList}
+                margin="normal"
+                variant="filled"
+                inputProps={{
+                  name: 'choose list',
+                  id: 'age-native-simple',
+                }}
+              >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+                {(this.state.tasklists).map ( (list) => {
+                  return (  <MenuItem style={styles.menuItem} value={list.name}> {list.name} </MenuItem>)
+                })}
+              </Select>
+            </FormControl>
+
+
+            <TextField id='newlistname' placeholder="New List Name" style={styles.input}/>
+            <Button style={styles.add} color="primary" variant="contained" onClick={this.addList}>Add New List</Button>
+
+              {this.ifList()}
+            <Container>
+              <Dialog
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+                TransitionComponent={Transition}
+                open={this.state.deleteOpen}
+                onRequestClose={this.closeDeleteModal}
+              >
+              <DialogTitle id="alert-dialog-slide-title">{"There are still tasks in this list."}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                  This will delete all tasks in the list. Are you sure you want to continue?
+                </DialogContentText>
+              </DialogContent>
+              <Divider/>
+              <DialogActions>
+                <Button onClick={this.deleteList} color="primary">
+                  Yes
+                </Button>
+                <Button onClick={this.closeDeleteModal} color="secondary">
+                  No
+                </Button>
+              </DialogActions>
+
+            </Dialog>
+          </Container>
+        </div>
+        <div id="list" class="col-md-8">
+          <div class="row">
+            <div>
+              <h3>{this.state.listname === '' ? 'Choose a tasklist' : 'Tasks in ' + this.state.listname}</h3>
+            </div>
+          </div>
+
+          <TaskList
+            listname={this.state.listname}
+            itemlist={this.state.tasks}
+            fetch={this.getTask}
+            style={styles.root}
+          />
         </div>
       </div>
-
-        <Divider />
-          <div class="row" style={styles.top}>
-            <div class="col-md-3" style={styles.inputMenu}>
-              <FormControl style={styles.form} variant='filled'>
-                <InputLabel htmlFor="age-label-placeholder">
-                Choose a Tasklist
-                </InputLabel>
-                <Select
-                  id="filled-select"
-                  label="Select"
-                  style={styles.select}
-                  class="toprow"
-                  onChange={this.changeList}
-                  margin="normal"
-                  variant="filled"
-                  inputProps={{
-                    name: 'choose list',
-                    id: 'age-native-simple',
-                  }}
-                >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                  {(this.state.tasklists).map ( (list) => {
-                    return (  <MenuItem style={styles.menuItem} value={list.name}> {list.name} </MenuItem>)
-                  })}
-                </Select>
-              </FormControl>
-
-
-                <TextField id='newlistname' placeholder="New List Name" style={styles.input}/>
-                <Button style={styles.add} color="primary" variant="contained" onClick={this.addList}>Add New List</Button>
-
-                {this.ifList()}
-                <Container>
-                <Dialog
-                  aria-labelledby="alert-dialog-slide-title"
-                  aria-describedby="alert-dialog-slide-description"
-                  TransitionComponent={Transition}
-                  open={this.state.deleteOpen}
-                  onRequestClose={this.closeDeleteModal}
-                >
-                <DialogTitle id="alert-dialog-slide-title">{"There are still tasks in this list."}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-slide-description">
-                    This will delete all tasks in the list. Are you sure you want to continue?
-                  </DialogContentText>
-                </DialogContent>
-                <Divider/>
-                <DialogActions>
-                  <Button onClick={this.deleteList} color="primary">
-                    Yes
-                  </Button>
-                  <Button onClick={this.closeDeleteModal} color="secondary">
-                    No
-                  </Button>
-                </DialogActions>
-
-              </Dialog>
-            </Container>
-            </div>
-            <div id="list" class="col-md-8">
-              <div class="row">
-                <div>
-                  <h3>{this.state.listname === '' ? 'Choose a tasklist' : 'Tasks in ' + this.state.listname}</h3>
-                </div>
-              </div>
-
-              <TaskList
-                listname={this.state.listname}
-                itemlist={this.state.tasks}
-                fetch={this.getTask}
-                style={styles.root}
-              />
-            </div>
-        </div>
-      </Container>
-    )
-  }
+    </Container>
+  )}
 }
 
 

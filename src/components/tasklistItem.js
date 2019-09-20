@@ -52,7 +52,6 @@ class TaskListItem extends React.Component{
       completed: current
     })
     .then( (res) => {
-      console.log('toggleworks')
       this.setState({
         strike: !this.state.strike
       })
@@ -74,7 +73,6 @@ class TaskListItem extends React.Component{
       list: this.props.list
     })
     .then( (res) => {
-      console.log('update works')
       this.props.fetch()
     })
     .catch( (err) => {
@@ -91,7 +89,6 @@ class TaskListItem extends React.Component{
     $.post('/user/task/delete', data)
     .then( (res) => {
       this.props.fetch()
-      console.log('delete works')
     })
     .catch( (err) => {
       console.log('delete broken')
@@ -99,7 +96,6 @@ class TaskListItem extends React.Component{
   }
 
   openEditModal() {
-    console.log('openclicked')
     this.setState({editModalIsOpen: true});
   }
 
@@ -109,7 +105,6 @@ class TaskListItem extends React.Component{
   }
 
   closeEditModal() {
-    console.log('closing')
     this.setState({editModalIsOpen: false});
   }
 
@@ -138,7 +133,6 @@ class TaskListItem extends React.Component{
       style.checked.textDecorationLine = 'line-through'
 
     }
-    console.log(this.state.strike)
     return(
 
 

@@ -1,4 +1,3 @@
-
 import React from "react";
 import App, { Container as NextContainer } from "next/app";
 import Head from "next/head";
@@ -41,12 +40,11 @@ class MyApp extends App {
     const style = {
       marginTop: '50px',
       backgroundColor: '#D5CAFA',
-      WebkitBoxShadow: 'inset 3px 3px 5px 0px rgba(0,0,0,0.75)',
-      MozBoxShadow: 'inset 3px 3px 5px 0px rgba(0,0,0,0.75)',
-      boxShadow: 'inset 3px 3px 5px 0px rgba(0,0,0,0.75)',
+      WebkitBoxShadow: 'inset 3px 3px 5px 5px rgba(0,0,0,0.75)',
+      MozBoxShadow: 'inset 3px 3px 5px 5px rgba(0,0,0,0.75)',
+      boxShadow: 'inset 3px 3px 5px 5px rgba(0,0,0,0.75)',
     }
 
-    // <Navbar user={this.state.user} />
     return (
       <NextContainer>
         <Head>

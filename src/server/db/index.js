@@ -40,7 +40,7 @@ const List = mongoose.model('List', listSchema, 'lists')
 const Task = mongoose.model('Task', taskSchema, 'tasks')
 
 const editTask = (data, cb) => {
-  console.log(data, 'data in edittask')
+
   const params = {
     name: data.oldName,
     user: data.user,
@@ -48,14 +48,14 @@ const editTask = (data, cb) => {
   }
 
   Task.findOneAndUpdate(params, {$set:{name:data.newName}}, (err, task) => {
-    console.log(err, task)
+
     cb()
   })
 
 }
 
 const editTaskComp = (data, cb) => {
-  console.log(data, 'data in edittask')
+
   var completed = data.completed
   var info = {
     name: data.name,
@@ -93,7 +93,7 @@ const saveTask = (data, cb) => {
 }
 
 const deleteTask = (data, cb) => {
-  console.log(data, 'id in db')
+
   Task.find(data).remove(cb)
 }
 
@@ -107,7 +107,6 @@ const getTasks = (info, cb) => {
 }
 
 const getTaskLists = (user, cb) => {
-  console.log(user , 'indbgettasklists')
   List.find({user: user}, (err, res) => {
     if(err){
       cb(err, null)
@@ -125,7 +124,7 @@ const saveTaskList = (data, cb) => {
     name: data.name,
     tasks: []
   })
-  console.log(data, 'in db save list')
+
   newList.save( (err) => {
     if(err){
       cb(err)
@@ -134,7 +133,7 @@ const saveTaskList = (data, cb) => {
 }
 
 const deleteTaskList = (data, cb) => {
-  console.log(data, 'in rmeove list')
+
   Task.remove(data, (err)=> {
     if(err){
       cb(err)
