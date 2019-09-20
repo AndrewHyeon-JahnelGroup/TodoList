@@ -54,7 +54,7 @@ MongoDB: In bash, run 'brew install mongodb'
 
 1. Clone the repo
 2. Run 'npm install' in bash/cmd inside the root todolist directory to install dependencies
-3. Run 'mongo' in bash/cmd to spin up a MongoDB server.
-4. Run 'mongod' in bash/cmd to open up a command line interface to query your database
+3. Run 'mongod' in bash/cmd to spin up a MongoDB server.
+4. Run 'mongo' in bash/cmd to open up a command line interface to query your database
 5. Start the app by running the 'npm run dev' command in cmd/bash
 6. Run tests by running the 'npm run test' command in cmd/bash

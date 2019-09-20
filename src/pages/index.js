@@ -99,6 +99,13 @@ class Index extends React.Component{
       alert('Error: New list needs a name')
       return
     }
+    var listnames = []
+    for(var i = 0; i < this.state.tasklists.length; i++){
+      if(this.state.tasklists[i].name === name){
+        alert('Error: You tried to add a duplicate list')
+        return
+      }
+    }
     console.log(this.props,  {
       user: this.props.user.displayName,
       name: document.getElementById('newlistname').value
@@ -174,6 +181,12 @@ class Index extends React.Component{
     if(name.length === 0){
       alert('Error: You tried to add an empty task')
       return
+    }
+    for(var i = 0; i < this.state.tasks.length; i++){
+      if(this.state.tasks[i].name === name){
+        alert('Error: You tried to add a duplicate task')
+        return
+      }
     }
 
     $.post('/user/task/add', {
