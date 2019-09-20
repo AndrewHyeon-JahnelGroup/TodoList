@@ -52,7 +52,7 @@ class TaskList extends React.Component{
           <TableHead>
             <TableRow>
               <TableCell align="right"><em>#</em></TableCell>
-              <TableCell align="right">Task</TableCell>
+              <TableCell align="left">Task</TableCell>
               <TableCell align="right">Completed</TableCell>
               <TableCell align="right">Edit</TableCell>
               <TableCell align="right">Delete</TableCell>
@@ -76,7 +76,7 @@ class TaskList extends React.Component{
                   editItem={this.props.editItem}
                   deleteItem={this.props.deleteItem}
                   fetch={this.props.fetch}
-                  />
+                />
 
             )
           })}

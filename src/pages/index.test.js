@@ -27,7 +27,15 @@ jest.mock('./index', function() {
         }
       }
       return currentTasks
-    })
+    }
+
+    getCurrentList(){
+      return currentList
+    }
+
+    getCurrentTasks(){
+      return currentTasks
+    }
 
     addTask(task){
       return tasks.push(task)
@@ -65,6 +73,10 @@ jest.mock('./index', function() {
 
     getTasks(){
       return tasks
+    }
+
+    getLists(){
+      return lists
     }
 
     checkComp(task){
@@ -151,7 +163,55 @@ describe('ToDo', () => {
       index.editTaskComp(task1)
       expect(index.checkComp(task1)).toBe(false)
       expect(index.checkComp(task2)).toBe(false)
+      index.deleteTask(task1)
+      index.deleteTask(task2)
+      expect(index.countTasks()).toBe(0)
+      expect(index.countLists()).toBe(0)
+    })
+  })
+  describe('correctly switches tasklists', () => {
+    it('Correctly changes current tasklist', () => {
+      var lists = [
+        {user: 'user1', list:'list1'},
+        {user: 'user1', list:'list2'},
+        {user: 'user2', list:'list1'},
+        {user: 'user2', list:'list2'},
+      ]
+      lists.forEach( (x) => {
+        index.addList(x)
+      })
+      expect(index.getLists().length).toBe(lists.length)
+      index.changelist({user:'user1', name:'list1'})
+      expect(index.getCurrentList()).toStrictEqual({user: 'user1', name: 'list1'})
+    })
+    it('Correctly changes tasks in current tasks when list is changed', () => {
+      var tasks = [
+        {user: 'user1',list: 'list1',name: 'task1'},
+        {user: 'user1',list: 'list1',name: 'task2'},
+        {user: 'user1',list: 'list1',name: 'task3'},
+        {user: 'user1',list: 'list2',name: 'task4'},
+        {user: 'user1',list: 'list2',name: 'task5'},
+        {user: 'user1',list: 'list2',name: 'task6'},
+        {user: 'user2',list: 'list1',name: 'task7'},
+        {user: 'user2',list: 'list1',name: 'task8'},
+        {user: 'user2',list: 'list1',name: 'task10'},
+        {user: 'user2',list: 'list2',name: 'task10'},
+        {user: 'user2',list: 'list2',name: 'task11'},
+        {user: 'user2',list: 'list2',name: 'task12'},
+      ]
+      var user1list1 = [tasks[0], tasks[1], tasks[2]]
+      var user1list2 = [tasks[3], tasks[4], tasks[5]]
+      var user2list1 = [tasks[6], tasks[7], tasks[8]]
+      var user2list2 = [tasks[9], tasks[10], tasks[11]]
+      tasks.forEach( (x) => {
+        index.addTask(x)
+      })
+      expect(index.getTasks().length).toBe(tasks.length)
+      expect( index.changelist({user: 'user1', list: 'list2'})).toBe(user1list2)
+
+
 
     })
   })
+
 })

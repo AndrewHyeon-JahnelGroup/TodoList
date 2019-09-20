@@ -13,11 +13,22 @@ import Modal from '@material-ui/core/Modal'
 import Dialog from '@material-ui/core/Dialog'
 import Divider from "@material-ui/core/Divider"
 import Link from "@material-ui/core/Link"
+import Fab from "@material-ui/core/Fab"
 import $ from 'axios';
 
 import NavBar from '../components/Navbar'
 import TaskList from '../components/TaskList'
 import AddItemModal from '../components/AddItemModal'
+
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 class Index extends React.Component{
 
@@ -44,8 +55,10 @@ class Index extends React.Component{
       listname: '',
       tasks: [],
       modalIsOpen: false,
-      deleteOpen: false
+      deleteOpen: false,
+      inputError: false,
     }
+
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.openDeleteModal = this.openDeleteModal.bind(this)
@@ -81,6 +94,11 @@ class Index extends React.Component{
   }
 
   addList(){
+    var name = document.getElementById('newlistname').value
+    if(name.length === 0){
+      alert('Error: New list needs a name')
+      return
+    }
     console.log(this.props,  {
       user: this.props.user.displayName,
       name: document.getElementById('newlistname').value
@@ -109,6 +127,7 @@ class Index extends React.Component{
   }
 
   deleteList(){
+
     const data = {
       list: this.state.listname,
     }
@@ -150,7 +169,12 @@ class Index extends React.Component{
     })
   }
 
-  addTask(){
+  addTask(event){
+    var name = document.getElementById('newtaskname').value
+    if(name.length === 0){
+      alert('Error: You tried to add an empty task')
+      return
+    }
 
     $.post('/user/task/add', {
       user: this.props.user.displayName,
@@ -202,7 +226,7 @@ class Index extends React.Component{
     }
     return (
       <div>
-      <TextField variant="filled" id='newtaskname' style={styles.input}/>
+      <TextField id='newtaskname' placeholder="New Task Name" style={styles.input}/>
       <Button color="primary" variant="contained" onClick={this.addTask} style={styles.add}>Add New Task</Button>
       <Button color="primary" variant="contained" style={styles.delete} onClick={this.openDeleteModal}> Delete List </Button>
       </div>
@@ -213,27 +237,32 @@ class Index extends React.Component{
 
     const styles = {
       title: {
-        color: 'black'
+        color: 'black',
+        fontFamily: 'Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif'
       },
       toprow: {
         width: '750px'
       },
       listTitle: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif'
+
       },
       root: {
         width: '100%',
       },
       inputMenu: {
-        background: '#7B61FF',
+        background: '#9170BA',
         padding: '5px',
         paddingLeft: '20px',
         paddingRight: '20px',
         paddingBottom: '20px',
+        marginTop: '50px',
         marginRight: '50px',
         textAlign: 'center',
         border: '1px solid black',
         borderRadius: '10px',
+        maxHeight: '350px',
         WebkitBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
         MozBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
         boxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)'
@@ -243,12 +272,13 @@ class Index extends React.Component{
       },
       input:{
         marginTop: '20px',
-        background: '#D5CAFA'
+        background: '#D5CAFA',
+        width: '100%'
 
       },
       select: {
-        marginTop: '20px',
-        marginBotto:'20px',
+        height: '80%',
+        marginBottom:'20px',
         background: '#D5CAFA'
       },
       deleteModal: {
@@ -257,13 +287,25 @@ class Index extends React.Component{
         border: '2px solid #000',
       },
       form:{
-        width: '100%'
+        width: '100%',
+        marginTop: '20px'
       },
       logout:{
-        color: 'white'
+        color: 'white',
+        height: '80%'
+
       },
       add:{
         width: '100%',
+      },
+      loButt: {
+        WebkitBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        MozBoxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        boxShadow: '5px 5px 5px 0px rgba(0,0,0,0.75)',
+        padding: '0px 10px 0px 10px'
+      },
+      div: {
+        width: '100%'
       }
     }
 
@@ -272,11 +314,12 @@ class Index extends React.Component{
       <div class='row'>
         <div class="col-md-10">
         <h2 style={styles.title} class="display-6 center-align">Forward Motion Project: Todo list</h2>
+        <Divider />
         </div>
         <div class="col-md-2">
-        <Button color="primary" variant="contained">
-        <Link style={styles.logout} href="/logout">Log Out</Link>
-        </Button>
+          <Fab style={styles.loButt} color="primary" variant="contained">
+            <Link style={styles.logout} href="/logout">Log Out</Link>
+          </Fab>
         </div>
       </div>
 
@@ -310,25 +353,36 @@ class Index extends React.Component{
               </FormControl>
 
 
-                <TextField variant="filled" id='newlistname' style={styles.input}/>
+                <TextField id='newlistname' placeholder="New List Name" style={styles.input}/>
                 <Button style={styles.add} color="primary" variant="contained" onClick={this.addList}>Add New List</Button>
 
                 {this.ifList()}
                 <Container>
                 <Dialog
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
+                  aria-labelledby="alert-dialog-slide-title"
+                  aria-describedby="alert-dialog-slide-description"
+                  TransitionComponent={Transition}
                   open={this.state.deleteOpen}
                   onRequestClose={this.closeDeleteModal}
                 >
-                  <div>
-                    <h4 id="simple-modal-title">There are still tasks in this list.<br /> Do you still want to delete?</h4>
-                    <Button onClick={this.deleteList}>Yes</Button>
-                    <Button onClick={this.closeDeleteModal}>No</Button>
+                <DialogTitle id="alert-dialog-slide-title">{"There are still tasks in this list."}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-slide-description">
+                    This will delete all tasks in the list. Are you sure you want to continue?
+                  </DialogContentText>
+                </DialogContent>
+                <Divider/>
+                <DialogActions>
+                  <Button onClick={this.deleteList} color="primary">
+                    Yes
+                  </Button>
+                  <Button onClick={this.closeDeleteModal} color="secondary">
+                    No
+                  </Button>
+                </DialogActions>
 
-                  </div>
-                </Dialog>
-                </Container>
+              </Dialog>
+            </Container>
             </div>
             <div id="list" class="col-md-8">
               <div class="row">
@@ -343,12 +397,7 @@ class Index extends React.Component{
                 fetch={this.getTask}
                 style={styles.root}
               />
-
-
-
             </div>
-
-
         </div>
       </Container>
     )

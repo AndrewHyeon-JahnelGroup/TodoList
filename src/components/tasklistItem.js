@@ -132,7 +132,7 @@ class TaskListItem extends React.Component{
       delete: {
         paddingRight: '5px',
         marginRight: '0px'
-      }
+      },
     }
     if(this.state.strike){
       style.checked.textDecorationLine = 'line-through'
@@ -143,11 +143,11 @@ class TaskListItem extends React.Component{
 
 
         <TableRow key={this.props.number}>
-          <TableCell component="th" scope="row">
+          <TableCell align="right" component="th" scope="row">
               {this.props.number}
           </TableCell>
 
-          <TableCell style={style.checked} align="right">
+          <TableCell style={style.checked} align="left">
             <div style={style.checked}>
               {this.props.itemName}
             </div>
